@@ -1,12 +1,57 @@
 <html>
 <head>
+<title>Examen 1. Number8</title>
+<script src="jquery-3.2.1.min.js"></script>
 </head>
+<script>
+function mostrar_resultado() {
+
+	var fecha = new Date(document.getElementById("fechai").value);
+	var nd=parseInt(document.getElementById("nd").value);
+	var j=1;
+	var text="<tr>";
+	var inicio=false;
+	var dw=fecha.getDay();
+	var diai=fecha.getDate();
+	
+	for(i=1;i<=nd;i++) {
+		if(j==dw && !inicio) {
+			inicio=true;
+		}
+		else {
+			text+="<td></td>";
+		}
+		
+		j++;
+		
+		if(inicio) {
+			text+="<td>"+diai+"</td>";
+			diai++;
+		}
+		
+		if(j>7) {
+			text+="</tr>&nbsp;<tr>";
+			j=1;
+		}
+			
+	}
+
+	$(document).ready(function(){
+		text="<table cellspacing=4 cellpadding=2 border=1>"+text+"</table>";
+		$('#resultado').html(text);
+	});
+
+	return false;
+}
+</script>
 <body>
-<form>
-	Start Date:<input id="fechai" name="fechai" type="text" size="12" maxlength="10" required="required"><br><br>
-	Number of days:<input id="nd" name="nd" type="text" size="6" maxlength="5" required="required"><br><br>
-	Country Code:<input id="cc" name="cc" type="text" size="3" maxlength="2" required="required"><br><br>
-	<br><br><input type="submit" value="Generar">
+<form onsubmit="return mostrar_resultado();">
+	Start Date:<input id="fechai" name="fechai" type="text" size="12" maxlength="10" required="required" value="8/15/2008"><br><br>
+	Number of days:<input id="nd" name="nd" type="text" size="6" maxlength="5" required="required" value="17"><br><br>
+	Country Code:<input id="cc" name="cc" type="text" size="3" maxlength="2" required="required" value="US"><br><br>
+	<br><br><input type="submit" value="Generar"><br><br>
+	<div id="resultado">
+	</div>
 </form>
 </body>
 </html>
