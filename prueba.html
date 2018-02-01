@@ -8,32 +8,22 @@ function mostrar_resultado() {
 
 	var fecha = new Date(document.getElementById("fechai").value);
 	var nd=parseInt(document.getElementById("nd").value);
-	var j=1;
+	var j=0;
 	var text="<tr>";
 	var inicio=false;
-	var dw=fecha.getDay();
+	var dw=fecha.getDay()+1;
 	var diai=fecha.getDate();
 	
-	for(i=1;i<=nd;i++) {
-		if(j==dw && !inicio) {
-			inicio=true;
-		}
-		else {
-			text+="<td></td>";
-		}
-		
-		j++;
-		
-		if(inicio) {
-			text+="<td>"+diai+"</td>";
-			diai++;
-		}
-		
-		if(j>7) {
-			text+="</tr>&nbsp;<tr>";
+	for(j=1;j<dw;j++)
+		text+="<td>&nbsp;</td>";
+	
+	for(i=1;i<=nd;i++) {	
+		text+="<td>"+diai+"</td>";
+		diai++;
+		if(++j>7) {
+			text+="</tr><tr>";
 			j=1;
-		}
-			
+		}	
 	}
 
 	$(document).ready(function(){
