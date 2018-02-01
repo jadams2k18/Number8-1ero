@@ -1,0 +1,26 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+
+	$(document).ready(function(){
+
+    $.get("https://holidayapi.com/v1/holidays?key=5277bc22-b820-43a2-a9c2-6e0e875cde84&country=US&year=2017&month=02", function(data, status){ 
+
+		var text="<br>";
+		
+		data.holidays.forEach(function(entry) {
+			text+= entry.date + "<br>";
+		});
+		
+		$('#resultado').html(text);
+		
+    });
+
+	});
+</script>
+<div id="resultado">
+</div>
+</body>
