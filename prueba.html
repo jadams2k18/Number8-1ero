@@ -3,6 +3,28 @@
 <title>Examen 1. Number8</title>
 <script src="jquery-3.2.1.min.js"></script>
 </head>
+<style>
+td {
+	text-align:center;
+	padding: 4px;
+}
+
+.verde1 {
+ background-color: #daf1bb6e;
+}
+
+.gris {
+ background-color: #d1d2d6;
+}
+
+.verde2 {
+ background-color: #d2f1a9;
+}
+
+.amarillo {
+ background-color: #f5ea6a;
+}
+</style>
 <script>
 function mostrar_resultado() {
 
@@ -10,24 +32,40 @@ function mostrar_resultado() {
 	var nd=parseInt(document.getElementById("nd").value);
 	var j=0;
 	var text="<tr>";
-	var inicio=false;
 	var dw=fecha.getDay()+1;
 	var diai=fecha.getDate();
+	var meses = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var head="<br><br><table>";
+	//
+	var y = fecha.getFullYear(), m = fecha.getMonth();
+	var ultimodia = new Date(y, m + 1, 0);
+	//
+	
+	
+	head+="<tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>";
+	head+="<tr class='verde1'><td colspan=7>"+meses[fecha.getMonth()]+" "+fecha.getFullYear()+"</td></tr>";
 	
 	for(j=1;j<dw;j++)
-		text+="<td>&nbsp;</td>";
+		text+="<td class='gris'>&nbsp;</td>";
 	
-	for(i=1;i<=nd;i++) {	
-		text+="<td>"+diai+"</td>";
+	for(i=1;i<=nd;i++) {
+		if(j==1 || j==7)
+			text+="<td class='amarillo'>"+diai+"</td>";
+		else
+			text+="<td class='verde2'>"+diai+"</td>";
 		diai++;
 		if(++j>7) {
 			text+="</tr><tr>";
 			j=1;
 		}	
 	}
+	
+	for(;j<=7;j++)
+		text+="<td class='gris'>&nbsp;</td>";
+	
+	text=head+text+"</table>";
 
 	$(document).ready(function(){
-		text="<table cellspacing=4 cellpadding=2 border=1>"+text+"</table>";
 		$('#resultado').html(text);
 	});
 
